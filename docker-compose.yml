@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+  nayzi_clinic:
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_DATABASE: 'nayzi'
+      MYSQL_USER: 'nayzi'
+      MYSQL_PASSWORD: 'rMZew4dBbzHastXP'
+      MYSQL_ROOT_PASSWORD: 'rMZew4dBbzHastXP'
+    volumes:
+      - mysql-data-volume:/var/lib/mysql
+    networks:
+      - nayzi_clinic
+
+  backend:
+    build: .
+    image: nayzi_clinic
+    ports:
+      - '8181:8000'
+    volumes:
+      - .:/nayzi_clinic
+    command: bash -c "export environment=docker.env && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - mysql
+    networks:
+      - nayzi_clinic
+
+volumes:
+  mysql-data-volume:

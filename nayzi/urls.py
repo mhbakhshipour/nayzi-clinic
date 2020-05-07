@@ -13,9 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from nayzi import settings
+
+admin.site.site_header = "پنل مدیریت نای ذی"
+admin.site.site_title = "پنل مدیریت نای ذی"
+admin.site.index_title = "پنل مدیریت نای ذی"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+                  path('admin/', admin.site.urls),
+                  url(r'^api-auth/', include('rest_framework.urls'))
+              ] + static(settings.STATIC_URL,
+                         document_root=settings.STATICFILES_DIRS) + static(settings.MEDIA_URL,
+                                                                           document_root=settings.MEDIA_ROOT)
