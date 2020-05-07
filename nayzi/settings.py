@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'froala_editor',
-    'jalali_date'
+    'jalali_date',
+    'authentication'
 ]
+
+AUTH_USER_MODEL = 'authentication.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -224,16 +227,19 @@ LOGGING = {
     }
 }
 
-
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'EXCEPTION_HANDLER': 'nayzi.exceptions.custom_rest_exception_handler',
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': []
 }
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(weeks=100),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=200),
+}
+
+VERIFICATION_CODE = {
+    'LENGTH': 5,
+    'EXPIRATION_DURATION_MINUTES': 5
 }
