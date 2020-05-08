@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'jalali_date',
     'authentication',
     'service',
+    'blog',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -147,6 +148,8 @@ STATICFILES_DIRS = [
 UPLOAD_DIRECTORIES = {
     'service_thumbnail': 'service_thumbnail',
     'service_gallery': 'service_gallery',
+    'blog_thumbnail': 'blog_thumbnail',
+    'category_thumbnail': 'category_thumbnail',
 }
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
