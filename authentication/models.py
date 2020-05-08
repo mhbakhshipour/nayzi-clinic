@@ -37,9 +37,13 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, mobile, password, **extra_fields):
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)
 
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
 
         return self.__create_user(mobile, password, **extra_fields)
 
@@ -56,6 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.TextField(_('address'), blank=True, null=True)
     birth_date = models.DateField(_('birth_date'), blank=True, null=True)
     verified_at = models.DateTimeField(_('verified_at'), blank=True, null=True)
+    is_staff = models.BooleanField(_('staff status'), default=False)
 
     objects = UserManager()
 

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'froala_editor',
     'jalali_date',
     'authentication',
+    'service',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -143,7 +144,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "statics")
 ]
 
-UPLOAD_DIRECTORIES = {}
+UPLOAD_DIRECTORIES = {
+    'service_thumbnail': 'service_thumbnail',
+    'service_gallery': 'service_gallery',
+}
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 

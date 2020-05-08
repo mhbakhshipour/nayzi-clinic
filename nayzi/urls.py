@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from authentication.urls import urlpatterns as authentication_urls
+from service.urls import urlpatterns as service_urls
 from nayzi import settings
 
 admin.site.site_header = "پنل مدیریت نای ذی"
@@ -26,6 +27,7 @@ admin.site.index_title = "پنل مدیریت نای ذی"
 
 imported_urls = [
     *authentication_urls,
+    *service_urls,
 ]
 
 urlpatterns = [
