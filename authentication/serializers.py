@@ -1,13 +1,13 @@
+import jdatetime
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.contrib.auth.password_validation import validate_password
 from django.db import IntegrityError
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from authentication.models import VerificationCode
+from authentication.models import VerificationCode, User
 from authentication.tokens import RegistrationToken
 from authentication.validations import is_valid_mobile, is_valid_email
 
@@ -17,8 +17,9 @@ def validate_mobile_number(value):
         raise serializers.ValidationError(_('Invalid mobile number'))
 
 
-def validate_input_password(value):
-    validate_password(value)
+def validate_email(value):
+    if not is_valid_email(value):
+        raise serializers.ValidationError(_('Invalid email'))
 
 
 class SterileSerializer(serializers.Serializer):
@@ -178,3 +179,24 @@ class ForgetPasswordSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         pass
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    email = serializers.CharField(required=False, validators=[validate_email])
+
+    @staticmethod
+    def _transform_jalali_date_to_gregorian(jalali_date):
+        return jdatetime.datetime.strptime(jalali_date, '%Y/%m/%d').togregorian().date()
+
+    def to_internal_value(self, data):
+        try:
+            if 'birth_date' in data and data['birth_date'] is not None and data['birth_date'] != '':
+                data['birth_date'] = self._transform_jalali_date_to_gregorian(data['birth_date'])
+        except Exception:
+            pass
+        return super().to_internal_value(data)
+
+    class Meta:
+        model = User
+        read_only_fields = ['mobile']
+        fields = ('mobile', 'first_name', 'last_name', 'date_joined', 'email', 'national_code', 'address', 'birth_date')

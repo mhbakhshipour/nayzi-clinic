@@ -15,6 +15,6 @@ urlpatterns = [
     path('api/v1/auth/forget-password/generate', ForgetPasswordGenerateAPI.as_view(),
          name='api_auth_forget_password_generate'),
     path('api/v1/auth/forget-password/verify', ForgetPasswordVerifyAPI.as_view(),
-         name='api_auth_forget_password_verify')
-
+         name='api_auth_forget_password_verify'),
+    path('api/v1/auth/users/me', UpdateProfileAPI.as_view(), name='api_update_profile'),
 ]

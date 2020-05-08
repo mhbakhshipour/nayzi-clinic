@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'froala_editor',
     'jalali_date',
-    'authentication'
+    'authentication',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -231,7 +231,7 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'nayzi.exceptions.custom_rest_exception_handler',
     'DEFAULT_PERMISSION_CLASSES': [],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': []
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication']
 }
 
 SIMPLE_JWT = {

@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(_('email'), blank=True, null=True, max_length=255)
     national_code = models.CharField(_('national_code'), max_length=10, null=True, blank=True)
     address = models.TextField(_('address'), blank=True, null=True)
-    birth_date = models.DateTimeField(_('birth_date'), blank=True, null=True)
+    birth_date = models.DateField(_('birth_date'), blank=True, null=True)
     verified_at = models.DateTimeField(_('verified_at'), blank=True, null=True)
 
     objects = UserManager()

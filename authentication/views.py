@@ -1,13 +1,14 @@
 from django.db import transaction
 from django.db.models import Q
 from django.utils.translation import ugettext as _
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from authentication.serializers import *
-from authentication.tokens import TemporaryJWTAuthentication, RegistrationToken
-from nayzi.custom_view_mixins import ExpressiveCreateModelMixin
+from authentication.tokens import TemporaryJWTAuthentication
+from nayzi.custom_view_mixins import ExpressiveCreateModelMixin, ExpressiveUpdateModelMixin
 from nayzi.exceptions import HttpUnauthorizedException, HttpConflictException
 
 
@@ -23,7 +24,8 @@ class RegisterAPI(ExpressiveCreateModelMixin, generics.CreateAPIView):
             if user:
                 raise HttpConflictException(_('This mobile is already registered'))
             else:
-                raise HttpConflictException(_('Your registration has been completed, but you have not completed your profile, please login to system to continue'))
+                raise HttpConflictException(_(
+                    'Your registration has been completed, but you have not completed your profile, please login to system to continue'))
 
 
 class VerifyRegistrationAPI(ExpressiveCreateModelMixin, generics.CreateAPIView):
@@ -117,3 +119,16 @@ class ForgetPasswordVerifyAPI(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save(issued_for='FORGET_PASSWORD')
         return Response({'status': 'ok', 'data': None})
+
+
+class UpdateProfileAPI(ExpressiveUpdateModelMixin, generics.UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    singular_name = 'profile'
+
+    def put(self, request, *args, **kwargs):
+        user = self.request.user
+        serializer = ProfileSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status': 'ok', 'data': {self.singular_name: serializer.data}})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
