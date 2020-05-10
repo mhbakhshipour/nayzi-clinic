@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'authentication',
     'service',
     'blog',
+    'core',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
