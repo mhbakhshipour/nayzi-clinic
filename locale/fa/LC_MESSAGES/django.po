@@ -1,0 +1,331 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-10 20:46+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: authentication/apps.py:7
+msgid "authentication"
+msgstr "احراز هویت"
+
+#: authentication/models.py:55 authentication/models.py:151
+msgid "mobile"
+msgstr "شماره همراه"
+
+#: authentication/models.py:56 blog/models.py:40
+msgid "first_name"
+msgstr "نام"
+
+#: authentication/models.py:57 blog/models.py:41
+msgid "last_name"
+msgstr "نام خوانوادگی"
+
+#: authentication/models.py:58
+msgid "date joined"
+msgstr "تاریخ عضویت"
+
+#: authentication/models.py:59 blog/models.py:38
+msgid "email"
+msgstr "ایمیل"
+
+#: authentication/models.py:60
+msgid "national_code"
+msgstr "کد ملی"
+
+#: authentication/models.py:61
+msgid "address"
+msgstr "آدرس"
+
+#: authentication/models.py:62
+msgid "birth_date"
+msgstr "تاریخ تولد"
+
+#: authentication/models.py:63
+msgid "verified_at"
+msgstr "تاریخ تایید"
+
+#: authentication/models.py:64
+msgid "staff status"
+msgstr "وضعیت کارمندی"
+
+#: authentication/models.py:92
+msgid "user"
+msgstr "کاربر"
+
+#: authentication/models.py:93
+msgid "users"
+msgstr "کاربران"
+
+#: authentication/models.py:146
+msgid "REGISTER"
+msgstr "ثبت نام"
+
+#: authentication/models.py:147
+msgid "LOGIN"
+msgstr "ورود"
+
+#: authentication/models.py:148
+msgid "FORGET_PASSWORD"
+msgstr "فراموشی رمز عبور"
+
+#: authentication/models.py:152
+msgid "code"
+msgstr "کد"
+
+#: authentication/models.py:153
+msgid "issued_for"
+msgstr "ساخته شده برای"
+
+#: authentication/models.py:154 authentication/models.py:155
+msgid "created_at"
+msgstr "تاریخ ایجاد"
+
+#: authentication/models.py:156
+msgid "expire_at"
+msgstr "تاریخ انقضا"
+
+#: authentication/models.py:157
+msgid "revoked_at"
+msgstr "منقضی شده در"
+
+#: authentication/models.py:167
+msgid "verification_code"
+msgstr "کد تایید"
+
+#: authentication/models.py:168
+msgid "verification_codes"
+msgstr "کد های تایید"
+
+#: authentication/serializers.py:17
+msgid "Invalid mobile number"
+msgstr "شماره همراه نامعتبر"
+
+#: authentication/serializers.py:22
+msgid "Invalid email"
+msgstr "ایمیل نامعتبر"
+
+#: authentication/serializers.py:42
+msgid ""
+"You already have requested a verification code. You can request vc code "
+"every {} minutes"
+msgstr "شما درخواست کد تایید قبلا داده اید. شما مجاز هستید هر {} دقیقه درخواست بدهید"
+
+#: authentication/serializers.py:80 authentication/serializers.py:167
+msgid "Verification code is expired, please request a new one"
+msgstr ""
+
+#: authentication/serializers.py:83 authentication/serializers.py:130
+#: authentication/serializers.py:170
+msgid "Invalid verification code"
+msgstr "کد تایید نامعتبر"
+
+#: authentication/serializers.py:120
+msgid "Invalid mobile "
+msgstr "شماره همراه نامعتبر"
+
+#: authentication/serializers.py:159
+msgid "Password and password confirmation do not match"
+msgstr ""
+
+#: authentication/tokens.py:34
+msgid "Given token not valid for any token type"
+msgstr "رمز دسترسی معتبر نمی باشد"
+
+#: authentication/views.py:25
+msgid "This mobile is already registered"
+msgstr "با این شماره قبلا ثبت نام شده است"
+
+#: authentication/views.py:28
+msgid ""
+"Your registration has been completed, but you have not completed your "
+"profile, please login to system to continue"
+msgstr "ثبت نام شما انجام شد. برای تکمیل پروفایل خود وارد شوید و اطلاعات خود را تکمیل کنید"
+
+#: authentication/views.py:49 authentication/views.py:64
+msgid "Verification code is not expired yet!"
+msgstr "شما نمی توانید درخواست مجدد بدهید. کد تایید شما هنوز منقضی نشده است!"
+
+#: authentication/views.py:87
+msgid "User does not exists"
+msgstr "کاربر در سیستم وجود ندارد"
+
+#: authentication/views.py:89
+msgid "You not permitted to login in user area"
+msgstr "شما باید ابتدا وارد حساب کاربری خود شوید"
+
+#: authentication/views.py:91
+msgid "Your mobile number has not been verified, please call support"
+msgstr "شماره همراه شما تایید نشده است. لطفا با پشتیبانی تماس بگیرید"
+
+#: blog/apps.py:7 core/apps.py:7
+msgid "core"
+msgstr "عمومی"
+
+#: blog/models.py:13 blog/models.py:114 core/models.py:8 core/models.py:29
+#: service/models.py:26
+msgid "title"
+msgstr "عنوان"
+
+#: blog/models.py:14 blog/models.py:115 service/models.py:10
+#: service/models.py:27
+msgid "description"
+msgstr "توضیحات"
+
+#: blog/models.py:15 blog/models.py:121 service/models.py:28
+msgid "thumbnail"
+msgstr "عکس نمایه"
+
+#: blog/models.py:16 blog/models.py:122 service/models.py:32
+msgid "slug"
+msgstr "نشانی"
+
+#: blog/models.py:17 blog/models.py:42 blog/models.py:120 core/models.py:9
+#: core/models.py:32 service/models.py:11 service/models.py:33
+msgid "created at"
+msgstr "تاریخ ایجاد"
+
+#: blog/models.py:24
+msgid "blog_category"
+msgstr "دسته بندی بلاگ"
+
+#: blog/models.py:25
+msgid "blog_categories"
+msgstr "دسته بندی های بلاگ"
+
+#: blog/models.py:33
+msgid "pending"
+msgstr "در حال بررسی"
+
+#: blog/models.py:34
+msgid "accepted"
+msgstr "تایید شده"
+
+#: blog/models.py:37 blog/models.py:55 blog/models.py:60
+msgid "comment"
+msgstr "نظر"
+
+#: blog/models.py:39
+msgid "phone"
+msgstr "شماره همراه"
+
+#: blog/models.py:44
+msgid "parent"
+msgstr "والد"
+
+#: blog/models.py:45
+msgid "status"
+msgstr "وضعیت"
+
+#: blog/models.py:56
+msgid "comments"
+msgstr "نظرات"
+
+#: blog/models.py:61
+msgid "content_type"
+msgstr "نوع محتوا"
+
+#: blog/models.py:62
+msgid "object_id"
+msgstr "آی دی محتوا"
+
+#: blog/models.py:104 blog/models.py:105
+msgid "commented_items"
+msgstr "دسته بندی نظرات"
+
+#: blog/models.py:117 core/models.py:31
+msgid "categories"
+msgstr "دسته بندی ها"
+
+#: blog/models.py:118
+msgid "time"
+msgstr "زمان مطالعه"
+
+#: blog/models.py:131 blog/models.py:132
+msgid "blog"
+msgstr "بلاگ"
+
+#: core/models.py:16
+msgid "faq_category"
+msgstr "دسته بندی سوالات متداول"
+
+#: core/models.py:17
+msgid "faq_categories"
+msgstr "دسته بندی های سوالات متداول"
+
+#: core/models.py:30
+msgid "content"
+msgstr "محتوا"
+
+#: core/models.py:41
+msgid "faq"
+msgstr "سوال"
+
+#: core/models.py:42
+msgid "faqs"
+msgstr "سوالات متداول"
+
+#: nayzi/custom_jwt_authentication.py:19
+msgid "User not found"
+msgstr "کاربر یافت نشد"
+
+#: nayzi/custom_jwt_authentication.py:22
+msgid "User is inactive"
+msgstr "کاربر غیر فعال است"
+
+#: nayzi/permissions.py:16
+msgid "This service does not belong to you"
+msgstr "این سرویس برای شما نمی باشد"
+
+#: nayzi/permissions.py:23
+msgid "Your account is not created as a consumer"
+msgstr ""
+
+#: nayzi/permissions.py:30
+msgid "Your consumer account is not verified yet, please contact support"
+msgstr ""
+
+#: nayzi/permissions.py:39
+msgid "You activity is not yet confirmed by system, please contact support"
+msgstr "فعالیت شما هنوز تایید نشده است. لطفا با پشتیبانی تماس بگیرید"
+
+#: nayzi/permissions.py:54
+msgid "You dont have permission"
+msgstr "شما اجازه دسترسی ندارید"
+
+#: service/apps.py:7 service/models.py:40
+msgid "service"
+msgstr "خدمت"
+
+#: service/models.py:9
+msgid "image"
+msgstr "عکس"
+
+#: service/models.py:18
+msgid "service_gallery"
+msgstr "گالری خدمت"
+
+#: service/models.py:19
+msgid "service_galleries"
+msgstr "گالری خدمات"
+
+#: service/models.py:30
+msgid "images"
+msgstr "عکس ها"
+
+#: service/models.py:41
+msgid "services"
+msgstr "خدمات"
