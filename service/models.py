@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from jalali_date import datetime2jalali
 
 from nayzi import settings
 
@@ -7,6 +8,10 @@ from nayzi import settings
 class ServiceGallery(models.Model):
     image = models.ImageField(_('image'), upload_to=settings.UPLOAD_DIRECTORIES['service_gallery'])
     description = models.TextField(_('description'), blank=False, null=False)
+    created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+
+    def jalali_created_at(self):
+        return datetime2jalali(self.created_at).strftime('%y/%m/%d')
 
     class Meta:
         db_table = 'service_galleries'
@@ -26,6 +31,9 @@ class Service(models.Model):
                                     blank=True)
     slug = models.CharField(_('slug'), max_length=255, blank=False, null=False)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+
+    def jalali_created_at(self):
+        return datetime2jalali(self.created_at).strftime('%y/%m/%d')
 
     class Meta:
         db_table = 'services'

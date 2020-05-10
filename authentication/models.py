@@ -8,6 +8,7 @@ from django.db import models
 from django.db.models import Manager
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from jalali_date import datetime2jalali
 
 from authentication.services import send_otp
 from authentication.validations import is_valid_mobile
@@ -74,6 +75,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     @staticmethod
     def get_login_status():
         return 'LOGIN'
+
+    def jalali_created_at(self):
+        return datetime2jalali(self.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
+
+    def jalali_birth_date(self):
+        if self.birth_date is not None:
+            return datetime2jalali(self.birth_date).strftime('%y/%m/%d')
+
+    def jalali_verified_at(self):
+        if self.verified_at is not None:
+            return datetime2jalali(self.verified_at).strftime('%y/%m/%d _ %H:%M:%S')
 
     class Meta:
         db_table = 'users'

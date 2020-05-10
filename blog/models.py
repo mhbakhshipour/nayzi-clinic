@@ -44,6 +44,9 @@ class Comment(models.Model):
                                verbose_name=_('parent'))
     status = models.CharField(_('status'), max_length=255, choices=comment_status_choices, default='pending')
 
+    def jalali_created_at(self):
+        return datetime2jalali(self.created_at).strftime('%y/%m/%d')
+
     def __str__(self):
         return self.comment
 
