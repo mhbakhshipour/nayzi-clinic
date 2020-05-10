@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models import Manager
 from django.utils.translation import ugettext as _
 from froala_editor.fields import FroalaField
+from jalali_date import datetime2jalali
 
 from nayzi import settings
 
@@ -14,6 +15,9 @@ class BlogCategory(models.Model):
     thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['category_thumbnail'])
     slug = models.CharField(_('slug'), max_length=255, null=False, blank=False)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+
+    def jalali_created_at(self):
+        return datetime2jalali(self.created_at).strftime('%y/%m/%d')
 
     class Meta:
         db_table = 'blog_categories'
@@ -81,7 +85,7 @@ class CommentedItems(models.Model):
 
     @property
     def comment_created_at(self):
-        return self.comment.created_at.strftime('%Y/%m/%d - %H:%M:%S')
+        return datetime2jalali(self.comment.created_at).strftime('%y/%m/%d')
 
     @property
     def comment_parent(self):
@@ -116,9 +120,8 @@ class Blog(models.Model):
 
     objects = BlogManager()
 
-    @property
-    def custom_created_at(self):
-        return self.created_at.strftime('%Y/%m/%d - %H:%M:%S')
+    def jalali_created_at(self):
+        return datetime2jalali(self.created_at).strftime('%y/%m/%d')
 
     class Meta:
         db_table = 'blog'

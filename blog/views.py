@@ -1,13 +1,20 @@
 from rest_framework import generics
+from rest_framework.pagination import PageNumberPagination
 
 from nayzi.custom_view_mixins import ExpressiveListModelMixin
 from blog.models import *
 from blog.serializers import *
 
 
+class ResultPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+
+
 class BlogListView(ExpressiveListModelMixin, generics.ListAPIView):
     serializer_class = BlogListSerializer
     plural_name = 'blog_list'
+    pagination_class = ResultPagination
 
     def get_queryset(self):
         queryset = Blog.objects.all().order_by('-created_at')
@@ -19,7 +26,7 @@ class BlogCategoryListView(ExpressiveListModelMixin, generics.ListAPIView):
     plural_name = 'blog_category_list'
 
     def get_queryset(self):
-        queryset = BlogCategory.objects.all().order_by('created_at')
+        queryset = BlogCategory.objects.all().order_by('-created_at')
         return queryset
 
 

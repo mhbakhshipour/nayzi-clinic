@@ -15,7 +15,7 @@ class BlogListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ['id', 'title', 'description', 'thumbnail', 'slug', 'created_at', 'time', 'cats']
+        fields = ['id', 'title', 'description', 'thumbnail', 'slug', 'jalali_created_at', 'time', 'cats']
 
 
 class CommentsSerializer(serializers.ModelSerializer):
@@ -33,7 +33,8 @@ class BlogDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = '__all__'
+        fields = ['id', 'title', 'description', 'content', 'cats', 'time', 'comments', 'thumbnail', 'slug',
+                  'jalali_created_at']
 
 
 class CommentedItemsSerializer(serializers.ModelSerializer):
