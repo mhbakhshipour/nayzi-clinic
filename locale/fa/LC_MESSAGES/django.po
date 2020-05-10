@@ -329,3 +329,12 @@ msgstr "عکس ها"
 #: service/models.py:41
 msgid "services"
 msgstr "خدمات"
+
+msgid "JALALI CREATED AT"
+msgstr "تاریخ ثبت"
+
+msgid "JALALI BIRTH_DATE"
+msgstr "تاریخ تولد"
+
+msgid "JALALI VERIFIED_AT"
+msgstr "تاریخ تایید"
