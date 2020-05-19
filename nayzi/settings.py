@@ -151,6 +151,7 @@ UPLOAD_DIRECTORIES = {
     'service_gallery': 'service_gallery',
     'blog_thumbnail': 'blog_thumbnail',
     'category_thumbnail': 'category_thumbnail',
+    'user_thumbnail': 'user_thumbnail',
 }
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)

@@ -65,7 +65,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ['mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'birth_date', 'tmp_token']
+        fields = ['mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'birth_date', 'tmp_token',
+                  'thumbnail']
 
 
 class RegistrationVerificationSerializer(serializers.Serializer):
@@ -199,4 +200,5 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         read_only_fields = ['mobile']
-        fields = ('mobile', 'first_name', 'last_name', 'date_joined', 'email', 'national_code', 'address', 'birth_date')
+        fields = ('mobile', 'first_name', 'last_name', 'date_joined', 'email', 'national_code', 'address', 'birth_date',
+                  'thumbnail')

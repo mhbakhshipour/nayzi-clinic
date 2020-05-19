@@ -56,6 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first_name'), max_length=255, blank=True, null=True)
     last_name = models.CharField(_('last_name'), max_length=255, blank=True, null=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+    thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['user_thumbnail'])
     email = models.CharField(_('email'), blank=True, null=True, max_length=255)
     national_code = models.CharField(_('national_code'), max_length=10, null=True, blank=True)
     address = models.TextField(_('address'), blank=True, null=True)
