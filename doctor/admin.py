@@ -27,7 +27,7 @@ class DoctorCertificateAdmin(admin.ModelAdmin):
 
 
 class DoctorEducationAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
-    list_display = ('uni', 'start_date', 'end_date',  'jalali_created_at')
+    list_display = ('uni', 'jalali_start_date', 'jalali_end_date',  'jalali_created_at')
     search_fields = ['uni']
 
 
