@@ -338,3 +338,54 @@ msgstr "تاریخ تولد"
 
 msgid "JALALI VERIFIED_AT"
 msgstr "تاریخ تایید"
+
+msgid "doctors"
+msgstr "دکتر ها"
+
+msgid "doctor"
+msgstr "دکتر"
+
+msgid "doctor_categories"
+msgstr "دسته بندی های دکتر"
+
+msgid "doctor_category"
+msgstr "دسته بندی دکتر"
+
+msgid "doctor_certificates"
+msgstr "مدارک دکتر"
+
+msgid "doctor_certificate"
+msgstr "مدرک دکتر"
+
+msgid "doctor_education"
+msgstr "تحصیلات دکتر"
+
+msgid "doctor_educations"
+msgstr "تحصیلات های دکتر"
+
+msgid "full_name"
+msgstr "نام و نام خانوادگی"
+
+msgid "about"
+msgstr "درباره من"
+
+msgid "job_position"
+msgstr "موقعیت شغلی"
+
+msgid "uni"
+msgstr "دانشگاه"
+
+msgid "start_date"
+msgstr "تاریخ شروع"
+
+msgid "end_date"
+msgstr "تاریخ پایان"
+
+msgid "twitter_link"
+msgstr "لینک توییتر"
+
+msgid "linkedin_link"
+msgstr "لینک لینکدین"
+
+msgid "instagram_link"
+msgstr "لینک اینستاگرام"

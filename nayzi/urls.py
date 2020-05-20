@@ -21,6 +21,7 @@ from authentication.urls import urlpatterns as authentication_urls
 from service.urls import urlpatterns as service_urls
 from blog.urls import urlpatterns as blog_urls
 from core.urls import urlpatterns as core_urls
+from doctor.urls import urlpatterns as doctor_urls
 from nayzi import settings
 
 admin.site.site_header = "پنل مدیریت نای ذی"
@@ -32,6 +33,7 @@ imported_urls = [
     *service_urls,
     *blog_urls,
     *core_urls,
+    *doctor_urls,
 ]
 
 urlpatterns = [
