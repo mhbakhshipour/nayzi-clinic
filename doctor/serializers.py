@@ -36,4 +36,5 @@ class DoctorDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
         fields = ['id', 'full_name', 'job_position', 'about', 'cats', 'educations', 'certificates', 'mobile',
-                  'thumbnail', 'slug', 'jalali_created_at', 'twitter_link', 'linkedin_link', 'instagram_link']
+                  'thumbnail', 'slug', 'jalali_join_at', 'jalali_created_at', 'twitter_link', 'linkedin_link',
+                  'instagram_link']

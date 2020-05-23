@@ -81,6 +81,7 @@ class Doctor(models.Model):
     educations = models.ManyToManyField(verbose_name=_('educations'), to="DoctorEducation", related_name='doctor_edu', blank=True)
     certificates = models.ManyToManyField(verbose_name=_('certificates'), to="DoctorCertificate", related_name='doctor_cer', blank=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+    join_at = models.DateField(_('join_at'), blank=False, null=False)
     thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['blog_thumbnail'])
     slug = models.CharField(max_length=255, verbose_name=_('slug'), unique=True)
     mobile = models.CharField(_('mobile'), max_length=20, null=True, blank=True)
@@ -92,6 +93,9 @@ class Doctor(models.Model):
 
     def jalali_created_at(self):
         return datetime2jalali(self.created_at).strftime('%y/%m/%d')
+
+    def jalali_join_at(self):
+        return date2jalali(self.join_at).strftime('%y/%m/%d')
 
     class Meta:
         db_table = 'doctors'

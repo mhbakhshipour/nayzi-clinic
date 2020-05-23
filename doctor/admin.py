@@ -5,7 +5,7 @@ from doctor.models import *
 
 
 class DoctorAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'job_position', 'mobile', 'categories', 'slug', 'jalali_created_at')
+    list_display = ('full_name', 'job_position', 'mobile', 'categories', 'slug', 'jalali_join_at', 'jalali_created_at')
     search_fields = ['full_name', 'job_position', 'mobile']
 
     def categories(self, obj):

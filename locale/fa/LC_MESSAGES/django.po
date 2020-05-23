@@ -389,3 +389,6 @@ msgstr "لینک لینکدین"
 
 msgid "instagram_link"
 msgstr "لینک اینستاگرام"
+
+msgid "join_at"
+msgstr "تاریخ پیوستن"
