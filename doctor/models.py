@@ -82,7 +82,7 @@ class Doctor(models.Model):
     certificates = models.ManyToManyField(verbose_name=_('certificates'), to="DoctorCertificate", related_name='doctor_cer', blank=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
     join_at = models.DateField(_('join_at'), blank=False, null=False)
-    thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['blog_thumbnail'])
+    thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['doctor_thumbnail'])
     slug = models.CharField(max_length=255, verbose_name=_('slug'), unique=True)
     mobile = models.CharField(_('mobile'), max_length=20, null=True, blank=True)
     twitter_link = models.URLField(_('twitter_link'), max_length=512, null=True, blank=True)
