@@ -161,8 +161,9 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://185.120.220.200:3000",
-    'http://nayziclinic.com'
+    'http://nayziclinic.com:3000',
+    'http://103.215.221.238:3000'
+    'http://103.215.221.238'
 ]
 
 JALALI_DATE_DEFAULTS = {
