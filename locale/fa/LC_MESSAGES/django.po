@@ -392,3 +392,6 @@ msgstr "لینک اینستاگرام"
 
 msgid "join_at"
 msgstr "تاریخ پیوستن"
+
+msgid "contact_us"
+msgstr "تماس با ما"

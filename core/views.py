@@ -3,7 +3,7 @@ from rest_framework import generics
 
 from core.models import *
 from core.serializers import *
-from nayzi.custom_view_mixins import ExpressiveListModelMixin
+from nayzi.custom_view_mixins import ExpressiveListModelMixin, ExpressiveCreateContactUsViewSetModelMixin
 
 
 class FaqListView(ExpressiveListModelMixin, generics.ListAPIView):
@@ -33,3 +33,7 @@ class FaqListByCategoryView(ExpressiveListModelMixin, generics.ListAPIView):
         queryset = Faq.objects.get_faq_with_by_category(cat_id).order_by('-created_at')
         return queryset
 
+
+class ContactUsViewSet(ExpressiveCreateContactUsViewSetModelMixin, generics.CreateAPIView):
+    serializer_class = ContactUsSerializer
+    singular_name = 'contact_us_form_created'

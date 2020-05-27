@@ -38,3 +38,11 @@ class ExpressiveUpdateModelMixin(UpdateModelMixin):
         response = super().update(request, *args, **kwargs)
         response.data = {'status': 'ok', 'data': {self.singular_name: response.data}}
         return response
+
+
+class ExpressiveCreateContactUsViewSetModelMixin(CreateModelMixin):
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        response.data = {'status': 'ok', 'data': {self.singular_name: response.data}}
+        return response
