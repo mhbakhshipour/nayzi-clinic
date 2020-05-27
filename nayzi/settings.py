@@ -167,8 +167,8 @@ CORS_ORIGIN_WHITELIST = [
     'https://nayziclinic.com',
     'http://103.215.221.238:3000',
     'https://103.215.221.238:3000',
-    'http://103.215.221.238'
-    'https://103.215.221.238'
+    'http://103.215.221.238',
+    'https://103.215.221.238',
 ]
 
 JALALI_DATE_DEFAULTS = {
