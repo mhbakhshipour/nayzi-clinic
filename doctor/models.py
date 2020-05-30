@@ -53,7 +53,7 @@ class DoctorCategory(models.Model):
     title = models.CharField(_('title'), max_length=255, null=False, blank=False, unique=True)
     description = models.TextField(_('description'), null=False, blank=False)
     thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['category_thumbnail'])
-    slug = models.CharField(_('slug'), max_length=255, null=False, blank=False)
+    slug = models.CharField(_('slug'), max_length=255, null=False, blank=False, unique=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
 
     def jalali_created_at(self):
@@ -75,7 +75,7 @@ class DoctorManager(Manager):
 
 class Doctor(models.Model):
     full_name = models.CharField(_('full_name'), max_length=255, unique=True)
-    job_position = models.CharField(_('job_position'), max_length=255, unique=True)
+    job_position = models.CharField(_('job_position'), max_length=255)
     about = FroalaField()
     cats = models.ManyToManyField(verbose_name=_('categories'), to="DoctorCategory", related_name='doctor_cat', blank=True)
     educations = models.ManyToManyField(verbose_name=_('educations'), to="DoctorEducation", related_name='doctor_edu', blank=True)

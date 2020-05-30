@@ -13,7 +13,7 @@ class BlogCategory(models.Model):
     title = models.CharField(_('title'), max_length=255, null=False, blank=False, unique=True)
     description = models.TextField(_('description'), null=False, blank=False)
     thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['category_thumbnail'])
-    slug = models.CharField(_('slug'), max_length=255, null=False, blank=False)
+    slug = models.CharField(_('slug'), max_length=255, null=False, blank=False, unique=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
 
     def jalali_created_at(self):

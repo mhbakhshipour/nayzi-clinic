@@ -401,3 +401,12 @@ msgstr "مشاهده شده"
 
 msgid "unread"
 msgstr "مشاهده نشده"
+
+msgid "About"
+msgstr "درباره"
+
+msgid "Educations"
+msgstr "تحصیلات"
+
+msgid "Certificates"
+msgstr "مدارک"
