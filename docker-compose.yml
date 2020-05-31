@@ -22,11 +22,9 @@ services:
 
   backend:
     build: .
-    image: nayzi_clinic
+    restart: always
     ports:
       - '8181:8000'
-    volumes:
-      - .:/nayzi_clinic
     command: bash -c "export environment=docker.env && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - mysql
