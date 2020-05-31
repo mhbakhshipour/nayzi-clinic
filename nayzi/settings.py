@@ -26,7 +26,7 @@ SECRET_KEY = 'ctfr%3$bm8ouv_7!q(-j!y56l3p!#d72wk%6+jo#kv-eoznq%#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = bool(os.environ.get('DEBUG'))
-DEBUG = True
+DEBUG = bool(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = os.environ.get(
     'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
@@ -144,7 +144,9 @@ MEDIA_URL = '/media/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_ROOT = os.path.join(BASE_DIR, "statics")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "statics")
+]
 
 UPLOAD_DIRECTORIES = {
     'service_thumbnail': 'service_thumbnail',
