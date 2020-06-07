@@ -12,6 +12,8 @@ from nayzi import settings
 class BlogCategory(models.Model):
     title = models.CharField(_('title'), max_length=255, null=False, blank=False, unique=True)
     description = models.TextField(_('description'), null=False, blank=False)
+    seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
+    seo_description = models.TextField(_('seo_description'), null=True, blank=True)
     thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['category_thumbnail'])
     slug = models.CharField(_('slug'), max_length=255, null=False, blank=False, unique=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
@@ -113,6 +115,8 @@ class BlogManager(Manager):
 class Blog(models.Model):
     title = models.CharField(_('title'), max_length=255, unique=True)
     description = models.TextField(_('description'), null=False, blank=False)
+    seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
+    seo_description = models.TextField(_('seo_description'), null=True, blank=True)
     content = FroalaField()
     cats = models.ManyToManyField(verbose_name=_('categories'), to="BlogCategory", related_name='blog_cat', blank=True)
     time = models.IntegerField(_('time'), null=False, blank=False)

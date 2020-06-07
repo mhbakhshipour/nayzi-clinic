@@ -421,3 +421,9 @@ msgstr "شما هنوز ثبت نام نکرده اید یا ثبت نام شم�
 
 msgid "Authentication credentials were not provided."
 msgstr "رمز دسترسی ارسال نشده است!"
+
+msgid "seo_title"
+msgstr "عنوان سئو"
+
+msgid "seo_description"
+msgstr "توضیحات سئو"

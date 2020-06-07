@@ -34,7 +34,7 @@ class BlogDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = ['id', 'title', 'description', 'content', 'cats', 'time', 'comments', 'thumbnail', 'slug',
-                  'jalali_created_at']
+                  'jalali_created_at', 'seo_title', 'seo_description']
 
 
 class CommentedItemsSerializer(serializers.ModelSerializer):

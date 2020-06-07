@@ -25,6 +25,8 @@ class ServiceGallery(models.Model):
 class Service(models.Model):
     title = models.CharField(_('title'), max_length=255, blank=False, null=False, unique=True)
     description = models.TextField(_('description'), blank=False, null=False)
+    seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
+    seo_description = models.TextField(_('seo_description'), null=True, blank=True)
     thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['service_thumbnail'],
                                   blank=True, null=True)
     images = models.ManyToManyField(verbose_name=_('images'), to="ServiceGallery", related_name='service_gallery',

@@ -8,6 +8,8 @@ from nayzi import settings
 
 class FaqCategory(models.Model):
     title = models.CharField(_('title'), max_length=255, null=False, blank=False, unique=True)
+    seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
+    seo_description = models.TextField(_('seo_description'), null=True, blank=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
 
     def jalali_created_at(self):
@@ -30,6 +32,8 @@ class FaqManager(Manager):
 class Faq(models.Model):
     title = models.CharField(_('title'), max_length=255, unique=True)
     content = models.TextField(_('content'), null=False, blank=False)
+    seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
+    seo_description = models.TextField(_('seo_description'), null=True, blank=True)
     cats = models.ManyToManyField(verbose_name=_('categories'), to="FaqCategory", related_name='faq_cat', blank=False)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
 

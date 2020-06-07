@@ -6,7 +6,7 @@ from core.models import *
 class FaqCategoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = FaqCategory
-        fields = ['id', 'title', 'jalali_created_at']
+        fields = ['id', 'title', 'jalali_created_at', 'seo_title', 'seo_description']
 
 
 class FaqListSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class FaqListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Faq
-        fields = ['id', 'title', 'content', 'jalali_created_at', 'cats']
+        fields = ['id', 'title', 'content', 'jalali_created_at', 'cats', 'seo_title', 'seo_description']
 
 
 class ContactUsSerializer(serializers.ModelSerializer):

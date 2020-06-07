@@ -52,6 +52,8 @@ class DoctorCertificate(models.Model):
 class DoctorCategory(models.Model):
     title = models.CharField(_('title'), max_length=255, null=False, blank=False, unique=True)
     description = models.TextField(_('description'), null=False, blank=False)
+    seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
+    seo_description = models.TextField(_('seo_description'), null=True, blank=True)
     thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['category_thumbnail'])
     slug = models.CharField(_('slug'), max_length=255, null=False, blank=False, unique=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
@@ -88,6 +90,8 @@ class Doctor(models.Model):
     twitter_link = models.URLField(_('twitter_link'), max_length=512, null=True, blank=True)
     linkedin_link = models.URLField(_('linkedin_link'), max_length=512, null=True, blank=True)
     instagram_link = models.URLField(_('instagram_link'), max_length=512, null=True, blank=True)
+    seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
+    seo_description = models.TextField(_('seo_description'), null=True, blank=True)
 
     objects = DoctorManager()
 
