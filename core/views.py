@@ -1,9 +1,12 @@
+from django.db.models import Q
 from django.shortcuts import render
 from rest_framework import generics
 
+from blog.models import Blog
 from core.models import *
 from core.serializers import *
 from nayzi.custom_view_mixins import ExpressiveListModelMixin, ExpressiveCreateContactUsViewSetModelMixin
+from service.models import Service
 
 
 class FaqListView(ExpressiveListModelMixin, generics.ListAPIView):
@@ -45,4 +48,23 @@ class PromotionListViewSet(ExpressiveListModelMixin, generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Promotion.objects.get_active_promotion().order_by('-created_at')
+        return queryset
+
+
+class SearchViewSet(ExpressiveListModelMixin, generics.ListAPIView):
+    serializer_class = SearchSerializer
+    plural_name = 'results'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        blog_lookup = (Q(title__icontains=query) | Q(description__icontains=query))
+        service_lookup = (Q(title__icontains=query) | Q(description__icontains=query))
+
+        blog = {'blog': list(
+            Blog.objects.filter(blog_lookup).distinct().values('id', 'title', 'description', 'thumbnail', 'slug'))}
+
+        service = {'services': list(
+            Service.objects.filter(service_lookup).distinct().values('id', 'title', 'description', 'thumbnail', 'slug'))}
+
+        queryset = [blog, service]
         return queryset

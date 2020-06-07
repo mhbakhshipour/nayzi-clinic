@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/v1/faq-by-category/list/<int:cat_id>', FaqListByCategoryView.as_view(), name='api_get_faq_list_by_category'),
     path('api/v1/contact-us-form', ContactUsViewSet.as_view(), name='contact_us_form'),
     path('api/v1/promotion/list', PromotionListViewSet.as_view(), name='promotions_list'),
+    path('api/v1/search', SearchViewSet.as_view(), name='search'),
 ]

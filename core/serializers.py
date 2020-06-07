@@ -27,3 +27,9 @@ class PromotionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Promotion
         fields = ['id', 'title', 'thumbnail', 'slug', 'is_active', 'jalali_created_at']
+
+
+class SearchSerializer(serializers.Serializer):
+
+    def to_representation(self, instance):
+        return instance
