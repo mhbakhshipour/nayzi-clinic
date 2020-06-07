@@ -119,14 +119,12 @@ msgid "Invalid email"
 msgstr "ایمیل نامعتبر"
 
 #: authentication/serializers.py:42
-msgid ""
-"You already have requested a verification code. You can request vc code "
-"every {} minutes"
+msgid "You already have requested a verification code. You can request vc code every {} minutes"
 msgstr "شما درخواست کد تایید قبلا داده اید. شما مجاز هستید هر {} دقیقه درخواست بدهید"
 
 #: authentication/serializers.py:80 authentication/serializers.py:167
 msgid "Verification code is expired, please request a new one"
-msgstr ""
+msgstr "کد تایید شما منقضی شده است! لطفا دوباره درخواست دهید"
 
 #: authentication/serializers.py:83 authentication/serializers.py:130
 #: authentication/serializers.py:170
@@ -150,9 +148,7 @@ msgid "This mobile is already registered"
 msgstr "با این شماره قبلا ثبت نام شده است"
 
 #: authentication/views.py:28
-msgid ""
-"Your registration has been completed, but you have not completed your "
-"profile, please login to system to continue"
+msgid "Your registration has been completed, but you have not completed your profile, please login to system to continue"
 msgstr "ثبت نام شما انجام شد. برای تکمیل پروفایل خود وارد شوید و اطلاعات خود را تکمیل کنید"
 
 #: authentication/views.py:49 authentication/views.py:64
@@ -419,3 +415,9 @@ msgstr "پروموشن"
 
 msgid "promotion"
 msgstr "پروموشن ها"
+
+msgid "You have not registered yet"
+msgstr "شما هنوز ثبت نام نکرده اید یا ثبت نام شما تکمیل نشده است!"
+
+msgid "Authentication credentials were not provided."
+msgstr "رمز دسترسی ارسال نشده است!"

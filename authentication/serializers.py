@@ -5,11 +5,13 @@ from django.db import IntegrityError
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from rest_framework import serializers
+from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from authentication.models import VerificationCode, User
 from authentication.tokens import RegistrationToken
 from authentication.validations import is_valid_mobile, is_valid_email
+from nayzi.exceptions import HttpNotFoundException, HttpForbiddenRequestException
 
 
 def validate_mobile_number(value):
@@ -45,15 +47,16 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'])
 
         try:
             existing_user = get_user_model().objects.get(mobile=validated_data['mobile'])
             if existing_user.verified_at is None:
                 existing_user.delete()
+                VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'])
             else:
                 raise IntegrityError
         except get_user_model().DoesNotExist:
+            VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'])
             pass
 
         user = get_user_model().objects.create(
@@ -106,7 +109,18 @@ class LoginInputSerializer(SterileSerializer):
     issued_for = serializers.CharField(read_only=True)
 
     def create(self, validated_data):
-        return VerificationCode.objects.create_verification_code(validated_data['mobile'], 'LOGIN')
+        try:
+            existing_user = get_user_model().objects.get(mobile=validated_data['mobile'])
+            if existing_user.verified_at is None:
+                raise HttpNotFoundException(_('You have not registered yet'))
+            else:
+                if VerificationCode.objects.already_requested_verification_code(validated_data['mobile']):
+                    raise HttpForbiddenRequestException(_(
+                        'You already have requested a verification code. You can request vc code every {} minutes'.format(
+                            settings.VERIFICATION_CODE['EXPIRATION_DURATION_MINUTES'])))
+                return VerificationCode.objects.create_verification_code(validated_data['mobile'], 'LOGIN')
+        except get_user_model().DoesNotExist:
+            raise HttpNotFoundException(_('You have not registered yet'))
 
 
 class LoginSerializer(serializers.Serializer):
@@ -202,3 +216,28 @@ class ProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ['mobile']
         fields = ('mobile', 'first_name', 'last_name', 'date_joined', 'email', 'national_code', 'address', 'birth_date',
                   'thumbnail')
+
+
+class TokenRefreshSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
+    def validate(self, attrs):
+        refresh = RefreshToken(attrs['refresh'])
+        data = {'status': 'ok', 'data': {'tokens': {'refresh': str(refresh), 'access': str(refresh.access_token)}}}
+
+        if api_settings.ROTATE_REFRESH_TOKENS:
+            if api_settings.BLACKLIST_AFTER_ROTATION:
+                try:
+                    # Attempt to blacklist the given refresh token
+                    refresh.blacklist()
+                except AttributeError:
+                    # If blacklist app not installed, `blacklist` method will
+                    # not be present
+                    pass
+
+            refresh.set_jti()
+            refresh.set_exp()
+
+            data['refresh'] = str(refresh)
+
+        return data

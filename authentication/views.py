@@ -5,6 +5,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenViewBase
 
 from authentication.serializers import *
 from authentication.tokens import TemporaryJWTAuthentication
@@ -132,3 +133,11 @@ class UpdateProfileAPI(ExpressiveUpdateModelMixin, generics.UpdateAPIView):
             serializer.save()
             return Response({'status': 'ok', 'data': {self.singular_name: serializer.data}})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TokenRefreshView(TokenViewBase):
+    """
+    Takes a refresh type JSON web token and returns an access type JSON web
+    token if the refresh token is valid.
+    """
+    serializer_class = TokenRefreshSerializer

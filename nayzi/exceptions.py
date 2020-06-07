@@ -14,14 +14,38 @@ def custom_rest_exception_handler(exc, context):
     if isinstance(exc, APIException):
         response = exception_handler(exc, context)
         if hasattr(exc, 'code'):
-            response.data = {'status': 'error', 'data': exc.detail, 'code': exc.code}
+            if 'code' in exc.detail:
+                try:
+                    if exc.detail['code'] == 'token_not_valid':
+                        response.data = {'status': 'error', 'data': {}, 'message': exc.detail['detail']}
+                except:
+                    response.data = {'status': 'error', 'data': {}, 'message': exc.detail}
+
+            elif 'non_field_errors' in exc.detail:
+                response.data = {'status': 'error', 'data': {}, 'message': exc.detail['non_field_errors'][0]}
+            else:
+                response.data = {'status': 'error', 'data': {}, 'message': exc.detail}
         else:
-            response.data = {'status': 'error', 'data': exc.detail}
+            if 'code' in exc.detail:
+                try:
+                    if exc.detail['code'] == 'token_not_valid':
+                        response.data = {'status': 'error', 'data': {}, 'message': exc.detail['detail']}
+                except:
+                    response.data = {'status': 'error', 'data': {}, 'message': exc.detail}
+
+            elif 'non_field_errors' in exc.detail:
+                response.data = {'status': 'error', 'data': {}, 'message': exc.detail['non_field_errors'][0]}
+            else:
+                response.data = {'status': 'error', 'data': {}, 'message': exc.detail}
         return response
 
 
 class HttpBadRequestException(CustomAPIException):
     status_code = status.HTTP_400_BAD_REQUEST
+
+
+class HttpForbiddenRequestException(CustomAPIException):
+    status_code = status.HTTP_403_FORBIDDEN
 
 
 class HttpNotFoundException(CustomAPIException):
