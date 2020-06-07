@@ -37,3 +37,12 @@ class FaqListByCategoryView(ExpressiveListModelMixin, generics.ListAPIView):
 class ContactUsViewSet(ExpressiveCreateContactUsViewSetModelMixin, generics.CreateAPIView):
     serializer_class = ContactUsSerializer
     singular_name = 'contact_us_form_created'
+
+
+class PromotionListViewSet(ExpressiveListModelMixin, generics.ListAPIView):
+    serializer_class = PromotionListSerializer
+    plural_name = 'promotions_list'
+
+    def get_queryset(self):
+        queryset = Promotion.objects.get_active_promotion().order_by('-created_at')
+        return queryset

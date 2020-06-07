@@ -1,6 +1,12 @@
 from django.contrib import admin
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 from blog.models import *
+
+
+class BlogCommentInlineModelAdmin(GenericStackedInline):
+    model = CommentedItems
+    extra = 1
 
 
 class BlogAdmin(admin.ModelAdmin):
@@ -14,6 +20,8 @@ class BlogAdmin(admin.ModelAdmin):
                 a.append(str(c.title))
             return a
 
+    inlines = (BlogCommentInlineModelAdmin,)
+
 
 class BlogCategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'slug', 'jalali_created_at')
@@ -22,7 +30,7 @@ class BlogCategoryAdmin(admin.ModelAdmin):
 
 class CommentsAdmin(admin.ModelAdmin):
     list_display = ('comment', 'email', 'phone', 'first_name', 'last_name', 'parent', 'status', 'jalali_created_at')
-    search_fields = ['comment']
+    search_fields = ['comment', 'email', 'phone', 'first_name', 'last_name']
     list_filter = ('status',)
 
 

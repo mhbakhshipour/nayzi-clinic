@@ -21,3 +21,9 @@ class ContactUsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactUs
         fields = ['id', 'full_name', 'email', 'phone', 'description', 'jalali_created_at', 'status']
+
+
+class PromotionListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Promotion
+        fields = ['id', 'title', 'thumbnail', 'slug', 'is_active', 'jalali_created_at']

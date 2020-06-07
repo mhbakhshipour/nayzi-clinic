@@ -3,6 +3,8 @@ from django.db.models import Manager
 from django.utils.translation import ugettext as _
 from jalali_date import datetime2jalali
 
+from nayzi import settings
+
 
 class FaqCategory(models.Model):
     title = models.CharField(_('title'), max_length=255, null=False, blank=False, unique=True)
@@ -69,3 +71,29 @@ class ContactUs(models.Model):
         db_table = 'contact_us'
         verbose_name = _('contact_us')
         verbose_name_plural = _('contact_us')
+
+
+class PromotionManager(Manager):
+    def get_active_promotion(self):
+        return self.filter(is_active=True)
+
+
+class Promotion(models.Model):
+    title = models.CharField(_('title'), max_length=255, unique=True)
+    thumbnail = models.ImageField(_('thumbnail'), upload_to=settings.UPLOAD_DIRECTORIES['promotion_thumbnail'], blank=False, null=False)
+    slug = models.CharField(max_length=255, verbose_name=_('slug'), unique=True, blank=False, null=False)
+    created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+    is_active = models.BooleanField(_('is_active'), default=False)
+
+    objects = PromotionManager()
+
+    def jalali_created_at(self):
+        return datetime2jalali(self.created_at).strftime('%y/%m/%d')
+
+    class Meta:
+        db_table = 'promotions'
+        verbose_name = _('promotion')
+        verbose_name_plural = _('promotions')
+
+    def __str__(self):
+        return self.title

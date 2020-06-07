@@ -410,3 +410,12 @@ msgstr "تحصیلات"
 
 msgid "Certificates"
 msgstr "مدارک"
+
+msgid "is_active"
+msgstr "فعال است؟"
+
+msgid "promotions"
+msgstr "پروموشن"
+
+msgid "promotion"
+msgstr "پروموشن ها"

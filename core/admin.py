@@ -41,6 +41,13 @@ class ContactUsAdmin(admin.ModelAdmin):
     search_fields = ['description', 'full_name', 'email', 'phone']
 
 
+class PromotionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'jalali_created_at', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ['title', 'slug']
+
+
 admin.site.register(Faq, FaqAdmin)
 admin.site.register(ContactUs, ContactUsAdmin)
 admin.site.register(FaqCategory, FaqCategoryAdmin)
+admin.site.register(Promotion, PromotionAdmin)
