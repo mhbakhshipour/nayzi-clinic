@@ -163,13 +163,10 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    'http://nayziclinic.com:3000',
     'https://nayziclinic.com:3000',
-    'http://nayziclinic.com',
     'https://nayziclinic.com',
-    'http://103.215.221.238:3000',
+    'https://www.nayziclinic.com',
     'https://103.215.221.238:3000',
-    'http://103.215.221.238',
     'https://103.215.221.238',
 ]
 
