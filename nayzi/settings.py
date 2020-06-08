@@ -166,6 +166,7 @@ CORS_ORIGIN_WHITELIST = [
     'https://nayziclinic.com:3000',
     'https://nayziclinic.com',
     'https://www.nayziclinic.com',
+    'https://www.nayziclinic.com:3000',
     'https://103.215.221.238:3000',
     'https://103.215.221.238',
 ]
