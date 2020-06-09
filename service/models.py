@@ -32,7 +32,7 @@ class Service(models.Model):
     images = models.ManyToManyField(verbose_name=_('images'), to="ServiceGallery", related_name='service_gallery',
                                     blank=True)
     slug = models.CharField(_('slug'), max_length=255, blank=False, null=False, unique=True)
-    order = models.SmallIntegerField(_('order'), max_length=4, blank=False, null=False, unique=True)
+    order = models.SmallIntegerField(_('order'), max_length=3, blank=False, null=False, unique=True)
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
 
     def jalali_created_at(self):
