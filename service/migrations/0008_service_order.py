@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='service',
             name='order',
-            field=models.SmallIntegerField(default=0, max_length=4, unique=True, verbose_name='order'),
+            field=models.SmallIntegerField(default=0, max_length=4, verbose_name='order'),
             preserve_default=False,
         ),
     ]
