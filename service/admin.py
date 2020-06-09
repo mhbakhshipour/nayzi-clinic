@@ -4,7 +4,7 @@ from service.models import Service, ServiceGallery
 
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'slug', 'jalali_created_at')
+    list_display = ('title', 'description', 'slug', 'jalali_created_at', 'order')
     search_fields = ['title']
 
 

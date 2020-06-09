@@ -13,7 +13,7 @@ class ServiceListView(ExpressiveListModelMixin, generics.ListAPIView):
     pagination_class = ResultPagination
 
     def get_queryset(self):
-        queryset = Service.objects.all().order_by('-created_at')
+        queryset = Service.objects.all().order_by('order')
         return queryset
 
 

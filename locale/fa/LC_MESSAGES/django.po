@@ -427,3 +427,6 @@ msgstr "عنوان سئو"
 
 msgid "seo_description"
 msgstr "توضیحات سئو"
+
+msgid "order"
+msgstr "ترتیب نمایش"
