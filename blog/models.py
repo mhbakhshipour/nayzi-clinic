@@ -108,8 +108,8 @@ class CommentedItems(models.Model):
 
 
 class BlogManager(Manager):
-    def get_blog_with_by_category(self, cat_id):
-        return self.filter(cats__id=cat_id)
+    def get_blog_with_by_category(self, cat_slug):
+        return self.filter(cats__slug=cat_slug)
 
 
 class Blog(models.Model):

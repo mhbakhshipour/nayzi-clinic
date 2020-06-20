@@ -22,6 +22,6 @@ class ServiceDetailView(ExpressiveListModelMixin, generics.ListAPIView):
     plural_name = 'service_detail'
 
     def get_queryset(self):
-        pk = self.kwargs['pk']
-        queryset = Service.objects.filter(pk=pk)
+        slug = self.kwargs['slug']
+        queryset = Service.objects.filter(slug=slug)
         return queryset

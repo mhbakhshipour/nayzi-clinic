@@ -35,8 +35,8 @@ class DoctorListByCategoryView(ExpressiveListModelMixin, generics.ListAPIView):
     plural_name = 'doctors_list_by_category'
 
     def get_queryset(self):
-        cat_id = self.kwargs['cat_id']
-        queryset = Doctor.objects.get_doctor_with_by_category(cat_id).order_by('-created_at')
+        cat_slug = self.kwargs['cat_slug']
+        queryset = Doctor.objects.get_doctor_with_by_category(cat_slug).order_by('-created_at')
         return queryset
 
 
@@ -45,6 +45,6 @@ class DoctorDetailView(ExpressiveListModelMixin, generics.ListAPIView):
     plural_name = 'doctor'
 
     def get_queryset(self):
-        pk = self.kwargs['pk']
-        queryset = Doctor.objects.filter(pk=pk)
+        slug = self.kwargs['slug']
+        queryset = Doctor.objects.filter(slug=slug)
         return queryset

@@ -35,8 +35,8 @@ class BlogListByCategoryView(ExpressiveListModelMixin, generics.ListAPIView):
     plural_name = 'blog_list_by_category'
 
     def get_queryset(self):
-        cat_id = self.kwargs['cat_id']
-        queryset = Blog.objects.get_blog_with_by_category(cat_id).order_by('-created_at')
+        cat_slug = self.kwargs['cat_slug']
+        queryset = Blog.objects.get_blog_with_by_category(cat_slug).order_by('-created_at')
         return queryset
 
 
@@ -45,8 +45,8 @@ class BlogDetailView(ExpressiveListModelMixin, generics.ListAPIView):
     plural_name = 'blog'
 
     def get_queryset(self):
-        pk = self.kwargs['pk']
-        queryset = Blog.objects.filter(pk=pk)
+        slug = self.kwargs['slug']
+        queryset = Blog.objects.filter(slug=slug)
         return queryset
 
 
