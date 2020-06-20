@@ -5,13 +5,14 @@ import logging
 logger = logging.getLogger('app')
 
 
-def send_otp(token, mobile):
+def send_otp(token, mobile, str_hash):
     try:
         api = KavenegarAPI(os.environ.get('KAVENEGAR_API_KEY'))
         params = {
             'sender': os.environ.get('KAVENEGAR_SENDER'),
             'receptor': mobile,
-            'message': 'کد فعال سازی :' + str(token),
+            'message': 'کلینیک نای ذی\nرمز احراز هویت شما: ' + str(token) + '\n\n' + str(
+                str_hash) if str_hash is not None else '',
         }
         response = api.sms_send(params)
         logging.info(

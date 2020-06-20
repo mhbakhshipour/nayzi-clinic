@@ -36,6 +36,7 @@ class SterileSerializer(serializers.Serializer):
 class UserRegistrationSerializer(serializers.ModelSerializer):
     mobile = serializers.CharField(required=True, validators=[validate_mobile_number])
     email = serializers.EmailField(required=False)
+    str_hash = serializers.CharField(required=False)
     tmp_token = serializers.CharField(read_only=True)
 
     def validate(self, data):
@@ -52,11 +53,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             existing_user = get_user_model().objects.get(mobile=validated_data['mobile'])
             if existing_user.verified_at is None:
                 existing_user.delete()
-                VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'])
+                VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'], validated_data['str_hash'])
             else:
                 raise IntegrityError
         except get_user_model().DoesNotExist:
-            VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'])
+            VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'], validated_data['str_hash'])
             pass
 
         user = get_user_model().objects.create(
@@ -69,7 +70,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ['mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'birth_date', 'tmp_token',
-                  'thumbnail']
+                  'thumbnail', 'str_hash']
 
 
 class RegistrationVerificationSerializer(serializers.Serializer):
@@ -106,6 +107,7 @@ class RegistrationVerificationSerializer(serializers.Serializer):
 
 class LoginInputSerializer(SterileSerializer):
     mobile = serializers.CharField(required=True)
+    str_hash = serializers.CharField(required=False)
     issued_for = serializers.CharField(read_only=True)
 
     def create(self, validated_data):
@@ -118,7 +120,7 @@ class LoginInputSerializer(SterileSerializer):
                     raise HttpForbiddenRequestException(_(
                         'You already have requested a verification code. You can request vc code every {} minutes'.format(
                             settings.VERIFICATION_CODE['EXPIRATION_DURATION_MINUTES'])))
-                return VerificationCode.objects.create_verification_code(validated_data['mobile'], 'LOGIN')
+                return VerificationCode.objects.create_verification_code(validated_data['mobile'], 'LOGIN', validated_data['str_hash'])
         except get_user_model().DoesNotExist:
             raise HttpNotFoundException(_('You have not registered yet'))
 

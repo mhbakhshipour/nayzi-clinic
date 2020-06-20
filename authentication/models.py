@@ -104,10 +104,10 @@ class VerificationCodeManager(Manager):
         limit = int("".join(['9' for _ in range(length)]))
         return random.randint(base, limit)
 
-    def create_verification_code(self, mobile, issued_for):
+    def create_verification_code(self, mobile, issued_for, str_hash=None):
         code = self.generate_verification_code()
         if os.environ.get('KAVENEGAR_API_ACTIVE') == "1":
-            send_otp(code, mobile)
+            send_otp(code, mobile, str_hash)
             return self.create(mobile=mobile, code=code, issued_for=issued_for)
         else:
             return self.create(mobile=mobile, code=code, issued_for=issued_for)
