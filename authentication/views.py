@@ -31,7 +31,7 @@ class RegisterAPI(ExpressiveCreateModelMixin, generics.CreateAPIView):
 
 class VerifyRegistrationAPI(ExpressiveCreateModelMixin, generics.CreateAPIView):
     serializer_class = RegistrationVerificationSerializer
-    singular_name = 'token'
+    singular_name = 'tokens'
 
     def create(self, request, *args, **kwargs):
         with transaction.atomic():
