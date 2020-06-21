@@ -9,12 +9,12 @@ def send_otp(token, mobile, str_hash):
     try:
         api = KavenegarAPI(os.environ.get('KAVENEGAR_API_KEY'))
         params = {
-            'sender': os.environ.get('KAVENEGAR_SENDER'),
             'receptor': mobile,
-            'message': 'کلینیک نای ذی\nرمز احراز هویت شما: ' + str(token) + '\n\n' + str(
-                str_hash) if str_hash is not None else '',
+            'template': 'otp-nayzi',
+            'token': str(token),
+            'token2': str(str_hash),
         }
-        response = api.sms_send(params)
+        response = api.verify_lookup(params)
         logging.info(
             str({
                 'action': 'SEND_SMS',
