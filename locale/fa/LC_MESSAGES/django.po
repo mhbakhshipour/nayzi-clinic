@@ -430,3 +430,6 @@ msgstr "توضیحات سئو"
 
 msgid "order"
 msgstr "ترتیب نمایش"
+
+msgid "You Can Not Permission To Create User, Because You Are Staff User"
+msgstr "شما اجازه ی ثبت نام با این شماره را ندارید لطفا با پشتیبانی تماس بگیرید!"

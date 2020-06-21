@@ -11,17 +11,17 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from authentication.models import VerificationCode, User
 from authentication.tokens import RegistrationToken
 from authentication.validations import is_valid_mobile, is_valid_email
-from nayzi.exceptions import HttpNotFoundException, HttpForbiddenRequestException
+from nayzi.exceptions import HttpNotFoundException, HttpForbiddenRequestException, HttpBadRequestException
 
 
 def validate_mobile_number(value):
     if not is_valid_mobile(value):
-        raise serializers.ValidationError(_('Invalid mobile number'))
+        raise HttpBadRequestException(_('Invalid mobile number'))
 
 
 def validate_email(value):
     if not is_valid_email(value):
-        raise serializers.ValidationError(_('Invalid email'))
+        raise HttpBadRequestException(_('Invalid email'))
 
 
 class SterileSerializer(serializers.Serializer):
@@ -40,7 +40,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     tmp_token = serializers.CharField(read_only=True)
 
     def validate(self, data):
-        if VerificationCode.objects.already_requested_verification_code(data['mobile']):
+        if User.objects.filter(mobile=data['mobile'], is_staff=True):
+            raise serializers.ValidationError(_('You Can Not Permission To Create User, Because You Are Staff User'))
+
+        elif VerificationCode.objects.already_requested_verification_code(data['mobile']):
             raise serializers.ValidationError(_(
                 'You already have requested a verification code. You can request vc code every {} minutes'.format(
                     settings.VERIFICATION_CODE['EXPIRATION_DURATION_MINUTES'])))
