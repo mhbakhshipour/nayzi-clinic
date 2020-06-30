@@ -220,7 +220,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = User
         read_only_fields = ['mobile']
         fields = ('mobile', 'first_name', 'last_name', 'date_joined', 'email', 'national_code', 'address', 'birth_date',
-                  'thumbnail')
+                  'thumbnail', 'jalali_created_at')
 
 
 class TokenRefreshSerializer(serializers.Serializer):
