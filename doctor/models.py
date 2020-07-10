@@ -92,6 +92,7 @@ class Doctor(models.Model):
     instagram_link = models.URLField(_('instagram_link'), max_length=512, null=True, blank=True)
     seo_title = models.CharField(_('seo_title'), max_length=255, unique=True, blank=True, null=True)
     seo_description = models.TextField(_('seo_description'), null=True, blank=True)
+    order = models.SmallIntegerField(_('order'), blank=False, null=False, unique=True)
 
     objects = DoctorManager()
 

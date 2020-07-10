@@ -17,7 +17,7 @@ class DoctorListView(ExpressiveListModelMixin, generics.ListAPIView):
     pagination_class = ResultPagination
 
     def get_queryset(self):
-        queryset = Doctor.objects.all().order_by('-created_at')
+        queryset = Doctor.objects.all().order_by('order')
         return queryset
 
 
@@ -36,7 +36,7 @@ class DoctorListByCategoryView(ExpressiveListModelMixin, generics.ListAPIView):
 
     def get_queryset(self):
         cat_slug = self.kwargs['cat_slug']
-        queryset = Doctor.objects.get_doctor_with_by_category(cat_slug).order_by('-created_at')
+        queryset = Doctor.objects.get_doctor_with_by_category(cat_slug).order_by('order')
         return queryset
 
 
