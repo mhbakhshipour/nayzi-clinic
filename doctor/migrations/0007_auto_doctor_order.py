@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='doctor',
             name='order',
-            field=models.SmallIntegerField(default=range(0, 99), unique=True, verbose_name='order'),
+            field=models.SmallIntegerField(default=0, unique=False, verbose_name='order'),
             preserve_default=False,
         ),
     ]
