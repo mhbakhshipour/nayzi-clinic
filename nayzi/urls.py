@@ -37,7 +37,7 @@ imported_urls = [
 ]
 
 urlpatterns = [
-                  path('nayziadminpanel/', admin.site.urls),
+                  path('nayziadminpanel/', admin.site.urls), url(r'^froala_editor/', include('froala_editor.urls')),
                   *imported_urls,
                   url(r'^api-auth/', include('rest_framework.urls'))
               ] + static(settings.STATIC_URL,
