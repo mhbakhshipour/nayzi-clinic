@@ -143,7 +143,7 @@ STATIC_URL = '/statics/'
 MEDIA_URL = '/media/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-FROALA_UPLOAD_PATH = os.path.join(BASE_DIR, 'media')
+FROALA_UPLOAD_PATH = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "statics")
