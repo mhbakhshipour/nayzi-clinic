@@ -9,6 +9,7 @@ from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from authentication.models import VerificationCode, User
+from authentication.services import check_user_crm_history
 from authentication.tokens import RegistrationToken
 from authentication.validations import is_valid_mobile, is_valid_email
 from nayzi.exceptions import HttpNotFoundException, HttpForbiddenRequestException, HttpBadRequestException
@@ -63,9 +64,30 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             VerificationCode.objects.create_verification_code(validated_data['mobile'], validated_data['issued_for'], validated_data['str_hash'])
             pass
 
-        user = get_user_model().objects.create(
-            mobile=validated_data['mobile'],
-        )
+        user_crm_history = check_user_crm_history(mobile=validated_data['mobile'])
+        if user_crm_history.status_code is 200:
+            user_crm_history = user_crm_history.json()
+            jalali_birth_date = jdatetime.datetime.strptime(user_crm_history['birthDate'].split(' ')[0],
+                                                            '%Y/%m/%d').togregorian().date()
+            user = get_user_model().objects.create(
+                mobile=validated_data['mobile'],
+                first_name=user_crm_history['name'],
+                last_name=user_crm_history['family'],
+                date_joined=user_crm_history['recordDate'],
+                birth_date=jalali_birth_date,
+                file_number=user_crm_history['fileNo'],
+                gender=user_crm_history['sex'],
+                email=user_crm_history['email'],
+                national_code=user_crm_history['ssn'],
+                address=user_crm_history['homeAddress'],
+                customer_id=user_crm_history['id'],
+                is_registered_from_here=False
+            )
+        else:
+            user = get_user_model().objects.create(
+                mobile=validated_data['mobile'],
+                is_registered_from_here=True
+            )
         user.save()
         user.tmp_token = RegistrationToken.for_user(user)
         return user
@@ -73,7 +95,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ['mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'birth_date', 'tmp_token',
-                  'thumbnail', 'str_hash']
+                  'thumbnail', 'file_number', 'customer_id', 'gender', 'is_registered_from_here', 'str_hash']
 
 
 class RegistrationVerificationSerializer(serializers.Serializer):
@@ -145,6 +167,22 @@ class LoginSerializer(serializers.Serializer):
             vc = VerificationCode.objects.get_if_exists(code, mobile, issued_for)
             if vc.expire_at <= timezone.now():
                 VerificationCode.objects.create_verification_code(mobile, issued_for)
+            user_crm_history = check_user_crm_history(mobile=mobile)
+            if user_crm_history.status_code is 200:
+                user_crm_history = user_crm_history.json()
+                jalali_birth_date = jdatetime.datetime.strptime(user_crm_history['birthDate'].split(' ')[0],
+                                                                '%Y/%m/%d').togregorian().date()
+                User.objects.filter(mobile=mobile).update(
+                    first_name=user_crm_history['name'],
+                    last_name=user_crm_history['family'],
+                    birth_date=jalali_birth_date,
+                    file_number=user_crm_history['fileNo'],
+                    gender=user_crm_history['sex'],
+                    email=user_crm_history['email'],
+                    national_code=user_crm_history['ssn'],
+                    address=user_crm_history['homeAddress'],
+                    customer_id=user_crm_history['id']
+                )
             vc.confirm()
         except VerificationCode.DoesNotExist:
             raise serializers.ValidationError(_('Invalid verification code'))
@@ -219,8 +257,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         read_only_fields = ['mobile']
-        fields = ('mobile', 'first_name', 'last_name', 'date_joined', 'email', 'national_code', 'address', 'birth_date',
-                  'thumbnail', 'jalali_created_at')
+        fields = ('mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'birth_date', 'thumbnail',
+                  'file_number', 'customer_id', 'gender', 'is_registered_from_here')
 
 
 class TokenRefreshSerializer(serializers.Serializer):

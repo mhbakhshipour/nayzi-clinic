@@ -433,3 +433,21 @@ msgstr "ترتیب نمایش"
 
 msgid "You Can Not Permission To Create User, Because You Are Staff User"
 msgstr "شما اجازه ی ثبت نام با این شماره را ندارید لطفا با پشتیبانی تماس بگیرید!"
+
+msgid "file_number"
+msgstr "شماره پرونده"
+
+msgid "gender"
+msgstr "جنسیت"
+
+msgid "male"
+msgstr "مرد"
+
+msgid "female"
+msgstr "زن"
+
+msgid "customer_id"
+msgstr "شماره مشتری"
+
+msgid "is_registered_from_here"
+msgstr "آیا از طریق این سیستم ثبت نام شده است؟"

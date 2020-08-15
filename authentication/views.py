@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenViewBase
 
 from authentication.serializers import *
+from authentication.services import update_crm
 from authentication.tokens import TemporaryJWTAuthentication
 from nayzi.custom_view_mixins import ExpressiveCreateModelMixin, ExpressiveUpdateModelMixin
 from nayzi.exceptions import HttpUnauthorizedException, HttpConflictException
@@ -131,6 +132,7 @@ class UpdateProfileAPI(ExpressiveUpdateModelMixin, generics.UpdateAPIView):
         serializer = ProfileSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            update_crm(user.mobile, serializer.data)
             return Response({'status': 'ok', 'data': {self.singular_name: serializer.data}})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

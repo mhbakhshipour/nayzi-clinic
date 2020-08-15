@@ -8,7 +8,7 @@ from django.db import models
 from django.db.models import Manager
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from jalali_date import datetime2jalali
+from jalali_date import datetime2jalali, date2jalali
 
 from authentication.services import send_otp
 from authentication.validations import is_valid_mobile
@@ -52,6 +52,11 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom user model suited for mobile number authentication"""
 
+    gender_choices = (
+        (1, _('male')),
+        (2, _('female'))
+    )
+
     mobile = models.CharField(_('mobile'), max_length=20, unique=True)
     first_name = models.CharField(_('first_name'), max_length=255, blank=True, null=True)
     last_name = models.CharField(_('last_name'), max_length=255, blank=True, null=True)
@@ -61,8 +66,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     national_code = models.CharField(_('national_code'), max_length=10, null=True, blank=True)
     address = models.TextField(_('address'), blank=True, null=True)
     birth_date = models.DateField(_('birth_date'), blank=True, null=True)
+    file_number = models.IntegerField(_('file_number'), blank=True, null=True)
+    customer_id = models.IntegerField(_('customer_id'), blank=True, null=True)
+    gender = models.SmallIntegerField(_('gender'), default=1, choices=gender_choices)
     verified_at = models.DateTimeField(_('verified_at'), blank=True, null=True)
     is_staff = models.BooleanField(_('staff status'), default=False)
+    is_registered_from_here = models.BooleanField(_('is_registered_from_here'), default=False)
 
     objects = UserManager()
 
@@ -82,7 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def jalali_birth_date(self):
         if self.birth_date is not None:
-            return datetime2jalali(self.birth_date).strftime('%y/%m/%d')
+            return date2jalali(self.birth_date).strftime('%y/%m/%d')
 
     def jalali_verified_at(self):
         if self.verified_at is not None:
