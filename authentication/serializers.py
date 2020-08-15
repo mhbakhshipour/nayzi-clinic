@@ -94,8 +94,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ['mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'birth_date', 'tmp_token',
-                  'thumbnail', 'file_number', 'customer_id', 'gender', 'is_registered_from_here', 'str_hash']
+        fields = ['mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'jalali_birth_date', 'tmp_token',
+                  'thumbnail', 'file_number', 'customer_id', 'gender', 'is_registered_from_here', 'str_hash', 'jalali_created_at']
 
 
 class RegistrationVerificationSerializer(serializers.Serializer):
@@ -257,8 +257,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         read_only_fields = ['mobile']
-        fields = ('mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'birth_date', 'thumbnail',
-                  'file_number', 'customer_id', 'gender', 'is_registered_from_here')
+        fields = ('mobile', 'first_name', 'last_name', 'email', 'national_code', 'address', 'jalali_birth_date', 'thumbnail',
+                  'file_number', 'customer_id', 'gender', 'is_registered_from_here', 'jalali_created_at')
 
 
 class TokenRefreshSerializer(serializers.Serializer):
